@@ -1,9 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <Predio.h>
+#include "Predio.h"
 
-Andar* buscar(Andar **predio, int valor) {
+void iniciar_predio(Andar **predio, int andares)
+{
+    *predio = NULL;
+    for (int i = 0; i < andares; i++)
+    {
+        inserir_f(predio, i);
+    }
+}
+
+Andar *buscar_andar(Andar **predio, int valor)
+{
     Andar *aux = *predio;
     while (aux && aux->valor != valor) {
         aux = aux->cima;
@@ -11,18 +21,11 @@ Andar* buscar(Andar **predio, int valor) {
     return aux;
 }
 
-void inserir_i(Andar **predio, int valor) {
-    Andar *aux = malloc(sizeof(struct Andar));
-    aux->valor = valor;
-    aux->cima = NULL;
-    aux->baixo = *predio;
-    if (*predio) (*predio)->baixo = aux;
-    *predio = aux; 
-}
-
-void inserir_f(Andar **predio, int valor) {
+void inserir_f(Andar **predio, int valor) 
+{
     Andar *aux = malloc(sizeof(Andar));
     aux->valor = valor;
+    aux->chamando = 0;
     aux->cima = NULL;
     aux->baixo = NULL;
 
@@ -39,7 +42,8 @@ void inserir_f(Andar **predio, int valor) {
     else *predio = aux;
 }
 
-void remover(Andar **predio, int valor) {
+void remover_andar(Andar **predio, int valor) 
+{
     Andar *aux = *predio;
     while(aux && aux->valor != valor) {
         aux = aux->cima;
@@ -51,7 +55,7 @@ void remover(Andar **predio, int valor) {
     free(aux);
 }
 
-void listar(Andar *predio) {
+void listar_andares(Andar *predio) {
     Andar *aux = predio;
     while(aux) {
         printf("%d\n", aux->valor);
@@ -59,7 +63,7 @@ void listar(Andar *predio) {
     }
 }
 
-void limpar(Andar **predio) {
+void limpar_predio(Andar **predio) {
     Andar *aux = *predio;
     while(aux->cima) {
         free(aux->valor);
