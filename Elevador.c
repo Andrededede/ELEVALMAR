@@ -46,3 +46,12 @@ void chamar(Elevador *e)
 {
 
 }
+
+void limpar_elevadores(Elevador ***e, int m)
+{
+    for (int i = 0; i < m; i++)
+    {
+        free(*(*e + i));
+    }
+    free(*e);
+}

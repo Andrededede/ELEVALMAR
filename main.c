@@ -17,7 +17,8 @@ int main() {
     Elevador **elevadores;
     iniciar_elevadores(&elevadores, predio, m);
     
-    
+    //Limpar Memoria
+    limpar_elevadores(&elevadores, m);
     limpar_predio(&predio);
 
     return 0;

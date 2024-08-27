@@ -13,5 +13,6 @@ void iniciar_elevadores(Elevador ***e, Andar *predio, int m);
 void subir(Elevador *e);
 void descer(Elevador *e);
 void chamar(Elevador *e);
+void limpar_elevadores(Elevador ***e, int m);
 
 #endif
