@@ -16,6 +16,22 @@ int main() {
     iniciar_predio(&predio, n);
     Elevador **elevadores;
     iniciar_elevadores(&elevadores, predio, m);
+
+    int tempo = 0;
+
+    while(1){
+        // atualizar chamadas no predio
+        // atualizar chamadas internas de cada elevador
+        for (int i = 0; i < m; i++)
+        {
+            mover(elevadores[i]); // decidir rota de cada elevador e mover
+        }
+        tempo++;
+        // wait 1seg
+        break;
+    }
+
+    printf("\nOs elevadores levaram %d segundos para entregar todas as pessoas a seus destinos.\n", tempo);
     
     //Limpar Memoria
     limpar_elevadores(&elevadores, m);

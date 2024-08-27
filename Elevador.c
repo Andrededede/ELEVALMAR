@@ -19,7 +19,14 @@ void iniciar_elevadores(Elevador ***e, Andar *predio, int m)
         (*(*e + i - 1))->nome[0] = 'E';
         (*(*e + i - 1))->nome[1] = i+'0';
         (*(*e + i - 1))->nome[2] = '\0';
+        (*(*e + i - 1))->chamadas = NULL;
     }
+}
+
+int parado(Elevador *e) 
+{
+    if (e->direcao == 0) return 1;
+    else return 0;
 }
 
 void subir(Elevador *e)
@@ -45,6 +52,13 @@ void descer(Elevador *e)
 void chamar(Elevador *e)
 {
 
+}
+
+void mover(Elevador *e)
+{
+    if (parado(e)) {
+        descer(e);
+    }
 }
 
 void limpar_elevadores(Elevador ***e, int m)
