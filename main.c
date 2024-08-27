@@ -22,13 +22,14 @@ int main() {
     while(1){
         // atualizar chamadas no predio
         // atualizar chamadas internas de cada elevador
+        printf("%d", tempo);
         for (int i = 0; i < m; i++)
         {
             mover(elevadores[i]); // decidir rota de cada elevador e mover
         }
         tempo++;
-        // wait 1seg
-        break;
+        sleep(1);
+        // wait 1seg sleep()
     }
 
     printf("\nOs elevadores levaram %d segundos para entregar todas as pessoas a seus destinos.\n", tempo);

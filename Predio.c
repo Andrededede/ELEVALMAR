@@ -64,6 +64,9 @@ void listar_andares(Andar *predio) {
 }
 
 void limpar_predio(Andar **predio) {
+    if(!(*predio)){
+        return;
+    }
     Andar *aux = *predio;
     while(aux->cima) {
         free(aux->valor);
@@ -72,4 +75,19 @@ void limpar_predio(Andar **predio) {
     }
     free(aux);
     *predio = NULL;
+}
+
+void chamar(Andar *predio, int valor, int direcao) {
+    //direcao é 1 ou -1
+    Andar *aux = buscar_andar(&predio, valor);
+    if(!aux){
+        return;
+    }
+    if(direcao==-1||direcao==1||direcao==0){
+        if(!(aux->chamando+direcao)&&direcao){
+            aux->chamando = 2;
+        }else{
+            aux->chamando = direcao;
+        }
+    }
 }

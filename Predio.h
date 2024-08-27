@@ -14,5 +14,6 @@ void inserir_f(Andar **predio, int valor);
 void remover_andar(Andar **predio, int valor);
 void listar_andares(Andar *predio);
 void limpar_predio(Andar **predio);
+void chamar(Andar *predio, int valor, int direcao);
 
 #endif
