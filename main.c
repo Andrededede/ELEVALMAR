@@ -27,7 +27,7 @@ int main() {
         {
             atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa
             definir_direcao(elevadores[i]); //definir se o elevador vai subir(1) ou descer(-1)
-            mover(elevadores[i]); // decidir rota de cada elevador e mover
+            mover(elevadores[i]); // mover elevador
         }
         tempo++;
         sleep(1);

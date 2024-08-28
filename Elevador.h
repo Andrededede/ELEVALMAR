@@ -7,8 +7,8 @@ typedef struct Elevador{
     Andar *andar;
     char nome[3];
     int direcao;
-    int *botoes_elevador;
-    Andar **requisicoes;
+    int *botoes_elevador; //botões apertados
+    Andar *requisicao;
     //char *rota;
 } Elevador;
 
