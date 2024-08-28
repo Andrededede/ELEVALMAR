@@ -25,10 +25,13 @@ int main() {
         printf("%d", tempo);
         for (int i = 0; i < m; i++)
         {
+            atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa
+            definir_direcao(elevadores[i]); //definir se o elevador vai subir(1) ou descer(-1)
             mover(elevadores[i]); // decidir rota de cada elevador e mover
         }
         tempo++;
         sleep(1);
+        break;
         // wait 1seg sleep()
     }
 

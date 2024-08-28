@@ -7,11 +7,15 @@ typedef struct Elevador{
     Andar *andar;
     char nome[3];
     int direcao;
-    int *chamadas;
+    int *botoes_elevador;
+    Andar **requisicoes;
     //char *rota;
 } Elevador;
 
 void iniciar_elevadores(Elevador ***e, Andar *predio, int m);
+void atribuir(Elevador *e);
+int parado(Elevador *e);
+void definir_direcao(Elevador *e);
 void subir(Elevador *e);
 void descer(Elevador *e);
 void chamar(Elevador *e);

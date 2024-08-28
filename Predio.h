@@ -5,7 +5,8 @@ typedef struct Andar {
     int valor;
     struct Andar *cima;
     struct Andar *baixo;
-    int chamando; // 0: sem chamadas; 1: chamando pra cima; ; -1: chamando pra baixo; 2: chamando os dois
+    int botao_subir; // 0: sem chamadas; 1: chamando pra cima; 2:elevador ja responsavel pela chamada
+    int botao_descer;
 } Andar;
 
 void iniciar_predio(Andar **predio, int andares);

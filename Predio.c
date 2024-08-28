@@ -25,9 +25,10 @@ void inserir_f(Andar **predio, int valor)
 {
     Andar *aux = malloc(sizeof(Andar));
     aux->valor = valor;
-    aux->chamando = 0;
     aux->cima = NULL;
     aux->baixo = NULL;
+    aux->botao_subir = 0;
+    aux->botao_subir = 0;
 
     Andar *aux2  = *predio;
     while(aux2 && aux2->cima) {
@@ -83,11 +84,5 @@ void chamar(Andar *predio, int valor, int direcao) {
     if(!aux){
         return;
     }
-    if(direcao==-1||direcao==1||direcao==0){
-        if(!(aux->chamando+direcao)&&direcao){
-            aux->chamando = 2;
-        }else{
-            aux->chamando = direcao;
-        }
-    }
+    
 }
