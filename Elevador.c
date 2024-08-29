@@ -145,6 +145,7 @@ void chamar(Elevador *e)
 
 void mover(Elevador *e)
 {
+    if (!e->requisicao && !e->botoes_elevador) e->direcao = -1;
     if (e->direcao == 1) {
         subir(e);
     }
