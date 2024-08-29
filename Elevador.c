@@ -20,7 +20,9 @@ void iniciar_elevadores(Elevador ***e, Andar *predio, int m)
         (*(*e + i - 1))->nome[1] = i+'0';
         (*(*e + i - 1))->nome[2] = '\0';
         (*(*e + i - 1))->botoes_elevador = NULL;
-        (*(*e + i - 1))->requisicao = NULL;
+        (*(*e + i - 1))->requisicao = malloc(sizeof(Requisicao));
+        (*(*e + i - 1))->requisicao->requisitado = NULL;
+        (*(*e + i - 1))->requisicao->direcaoRequisitada = 0;
     }
 }
 
@@ -31,36 +33,70 @@ void atribuir(Elevador *e)
         while(aux && aux->botao_subir != 1) {
             aux = aux->cima;
         }
-        if(aux) {
-            //if (e->requisicao && e->requisicao->botao_subir == 1) return;
-            if (e->requisicao && e->requisicao->valor < aux->valor) return;
-            if (e->requisicao && e->requisicao->valor > aux->valor) e->requisicao->botao_subir = 1;
-            e->requisicao = aux;
-            e->requisicao->botao_subir = 2;
+        if(aux) { // achou uma requisição e vai descidir se pega ou não
+            if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == 1) { // ja tenho uma req na direção
+                if(e->requisicao->requisitado->valor < aux->valor) return; // ela é melhor
+                if(e->requisicao->requisitado->valor > aux->valor) e->requisicao->requisitado->botao_subir = 1; // ela é pior, desisto dela
+            }
+            if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == -1) { // ja tenho uma na direção oposta
+                e->requisicao->requisitado->botao_descer = 1; // desisto dela pq quero manter a direção
+            }
+            // pegar a req nova
+            e->requisicao->requisitado = aux;
+            e->requisicao->requisitado->botao_subir = 2;
+            e->requisicao->direcaoRequisitada = 1;
             return;
         }
+        if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == 1) return; // opa ja tenho req na melhor direção
         aux = e->andar;
         while(aux && aux->botao_descer != 1) {
             aux = aux->cima;
         }
-        if(aux) {
-            if(e->requisicao && e->requisicao->botao_subir == 2) return;
-
-
-            if(e->requisicao) e->requisicao->botao_subir = 1;
-            e->requisicao = aux; // inserir requisição
-            aux->botao_subir = 2;
+        if(aux) { // achou requisição
+            if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == -1) { // ja tenho uma req na direção
+                if(e->requisicao->requisitado->valor > aux->valor) return; // a minha é melhor
+                if(e->requisicao->requisitado->valor < aux->valor) e->requisicao->requisitado->botao_descer = 1; // a minha é pior, desisto dela
+            }
+            // pegar a req nova
+            e->requisicao->requisitado = aux;
+            e->requisicao->requisitado->botao_descer = 2;
+            e->requisicao->direcaoRequisitada = -1;
             return;
         }
     }
     if(e->direcao == -1){
-        while(aux && aux->botao_descer!=1) {
+        while(aux && aux->botao_descer != 1) {
             aux = aux->baixo;
         }
-        if(aux) {
-            if(e->requisicao) e->requisicao->botao_descer = 1;
-            e->requisicao = aux; // inserir requisição
-            aux->botao_descer = 2;
+        if(aux) { // achou uma requisição e vai descidir se pega ou não
+            if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == -1) { // ja tenho uma req na direção
+                if(e->requisicao->requisitado->valor > aux->valor) return; // ela é melhor
+                if(e->requisicao->requisitado->valor < aux->valor) e->requisicao->requisitado->botao_descer = 1; // ela é pior, desisto dela
+            }
+            if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == 1) { // ja tenho uma na direção oposta
+                e->requisicao->requisitado->botao_subir = 1; // desisto dela pq quero manter a direção
+            }
+            // pegar a req nova
+            e->requisicao->requisitado = aux;
+            e->requisicao->requisitado->botao_descer = 2;
+            e->requisicao->direcaoRequisitada = -1;
+            return;
+        }
+        if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == -1) return; // opa ja tenho req na melhor direção
+        aux = e->andar;
+        while(aux && aux->botao_subir != 1) {
+            aux = aux->baixo;
+        }
+        if(aux) { // achou requisição
+            if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == 1) { // ja tenho uma req na direção
+                if(e->requisicao->requisitado->valor < aux->valor) return; // a minha é melhor
+                if(e->requisicao->requisitado->valor > aux->valor) e->requisicao->requisitado->botao_subir = 1; // a minha é pior, desisto dela
+            }
+            // pegar a req nova
+            e->requisicao->requisitado = aux;
+            e->requisicao->requisitado->botao_subir = 2;
+            e->requisicao->direcaoRequisitada = 1;
+            return;
         }
     }
 }

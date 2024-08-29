@@ -3,14 +3,20 @@
 
 #include "Predio.h"
 
+typedef struct requisicao{
+    Andar *requisitado;
+    int direcaoRequisitada; //0 ou 1 ou -1
+} Requisicao;
+
 typedef struct Elevador{
     Andar *andar;
     char nome[3];
     int direcao;
     int *botoes_elevador; //botões apertados
-    Andar *requisicao;
+    Requisicao *requisicao;
     //char *rota;
 } Elevador;
+
 
 void iniciar_elevadores(Elevador ***e, Andar *predio, int m);
 void atribuir(Elevador *e);
