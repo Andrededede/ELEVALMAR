@@ -109,7 +109,7 @@ int parado(Elevador *e)
 
 void definir_direcao(Elevador * e)
 {
-    if(e->requisicao);
+    if(e->requisicao->requisitado) return; // tenho requisição, vou manter a direção
 
 
     if(e->direcao == -1) {
@@ -145,7 +145,7 @@ void chamar(Elevador *e)
 
 void mover(Elevador *e)
 {
-    if (!e->requisicao && !e->botoes_elevador) e->direcao = -1;
+    if (!e->requisicao->requisitado && !e->botoes_elevador) e->direcao = -1;
     if (e->direcao == 1) {
         subir(e);
     }

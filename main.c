@@ -25,7 +25,7 @@ int main() {
         printf("%d", tempo);
         for (int i = 0; i < m; i++)
         {
-            atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa
+            atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa na direção atual
             definir_direcao(elevadores[i]); //definir se o elevador vai subir(1) ou descer(-1)
             mover(elevadores[i]); // mover elevador
         }
