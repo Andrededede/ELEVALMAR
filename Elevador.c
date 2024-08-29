@@ -154,6 +154,11 @@ void mover(Elevador *e)
     }
 }
 
+void controlar_porta(Elevador *e)
+{
+    
+}
+
 void limpar_elevadores(Elevador ***e, int m)
 {
     for (int i = 0; i < m; i++)
