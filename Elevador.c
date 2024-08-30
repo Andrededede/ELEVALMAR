@@ -101,12 +101,6 @@ void atribuir(Elevador *e)
     }
 }
 
-int parado(Elevador *e) 
-{
-    if (e->direcao == 0) return 1;
-    else return 0;
-}
-
 void definir_direcao(Elevador * e)
 {
     if(e->requisicao->requisitado) return; // tenho requisição, vou manter a direção
