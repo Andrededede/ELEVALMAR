@@ -19,7 +19,9 @@ void iniciar_elevadores(Elevador ***e, Andar *predio, int m)
         (*(*e + i - 1))->nome[0] = 'E';
         (*(*e + i - 1))->nome[1] = i+'0';
         (*(*e + i - 1))->nome[2] = '\0';
-        (*(*e + i - 1))->botoes_elevador = NULL;
+        (*(*e + i - 1))->botoes = malloc(sizeof(Botoes));
+        (*(*e + i - 1))->botoes->tam = 0 ;
+        (*(*e + i - 1))->botoes->apertados = NULL ;
         (*(*e + i - 1))->requisicao = malloc(sizeof(Requisicao));
         (*(*e + i - 1))->requisicao->requisitado = NULL;
         (*(*e + i - 1))->requisicao->direcaoRequisitada = 0;
@@ -104,14 +106,23 @@ void atribuir(Elevador *e)
 void definir_direcao(Elevador * e)
 {
     if(e->requisicao->requisitado) return; // tenho requisição, vou manter a direção
-
-
-    if(e->direcao == -1) {
-        if(!e->requisicao && (!(e->botoes_elevador) || *(e->botoes_elevador) > e->andar->valor)) { // se n ha requisições externas ou internas
-            e->direcao = e->direcao * -1;
-            return;
-        }   
+    if(!e->botoes->apertados)  { // se não tem botões apertados, inverto a direção
+        e->direcao = e->direcao * -1;
+        atribuir(e);
+        return;
     }
+    for (int i = 0; i < e->botoes->tam; i++) // verifica se tem um botao apertado em um andar seguindo a direção atual
+    {
+        if(e->direcao == 1) {
+            if(e->botoes->apertados + i > e->andar->valor) return;
+        }
+        if(e->direcao == -1) {
+            if(e->botoes->apertados + i < e->andar->valor) return;
+        }
+    }
+    e->direcao = e->direcao * -1;
+    atribuir(e);
+    return;
 }
 
 void subir(Elevador *e)
@@ -134,12 +145,12 @@ void descer(Elevador *e)
 
 void chamar(Elevador *e)
 {
-
+    return;
 }
 
 void mover(Elevador *e)
 {
-    if (!e->requisicao->requisitado && !e->botoes_elevador) e->direcao = -1;
+    if (!e->requisicao->requisitado && !e->botoes->apertados) e->direcao = -1;
     if (e->direcao == 1) {
         subir(e);
     }
@@ -150,14 +161,15 @@ void mover(Elevador *e)
 
 void controlar_porta(Elevador *e)
 {
-    
+    return;
 }
 
 void limpar_elevadores(Elevador ***e, int m)
 {
     for (int i = 0; i < m; i++)
     {
-        free((*(*e + i))->botoes_elevador);
+        free((*(*e + i))->botoes);
+        free((*(*e + i))->botoes->apertados);
         free((*(*e + i))->requisicao);
         free(*(*e + i));
     }

@@ -8,11 +8,16 @@ typedef struct requisicao{
     int direcaoRequisitada; //0 ou 1 ou -1
 } Requisicao;
 
+typedef struct Botoes{
+    int *apertados;
+    int tam;
+} Botoes;
+
 typedef struct Elevador{
     Andar *andar;
     char nome[3];
     int direcao;
-    int *botoes_elevador; //botões apertados
+    Botoes *botoes; //botões apertados
     Requisicao *requisicao;
     //char *rota;
 } Elevador;
