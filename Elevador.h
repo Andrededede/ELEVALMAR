@@ -28,7 +28,7 @@ void atribuir(Elevador *e);
 void definir_direcao(Elevador *e);
 void subir(Elevador *e);
 void descer(Elevador *e);
-void chamar(Elevador *e);
+//void chamar(Elevador *e);
 void mover(Elevador *e);
 void controlar_porta(Elevador *e);
 void limpar_elevadores(Elevador ***e, int m);

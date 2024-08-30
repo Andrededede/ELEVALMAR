@@ -114,10 +114,10 @@ void definir_direcao(Elevador * e)
     for (int i = 0; i < e->botoes->tam; i++) // verifica se tem um botao apertado em um andar seguindo a direção atual
     {
         if(e->direcao == 1) {
-            if(e->botoes->apertados + i > e->andar->valor) return;
+            if(e->botoes->apertados[i] > e->andar->valor) return;
         }
         if(e->direcao == -1) {
-            if(e->botoes->apertados + i < e->andar->valor) return;
+            if(e->botoes->apertados[i] < e->andar->valor) return;
         }
     }
     e->direcao = e->direcao * -1;
@@ -143,10 +143,10 @@ void descer(Elevador *e)
     e->andar = e->andar->baixo;
 }
 
-void chamar(Elevador *e)
-{
-    return;
-}
+// void chamar(Elevador *e)
+// {
+//     return;
+// }
 
 void mover(Elevador *e)
 {
@@ -161,7 +161,27 @@ void mover(Elevador *e)
 
 void controlar_porta(Elevador *e)
 {
-    return;
+    // desapertar o botão interno
+    for (int i = 0; i < e->botoes->tam; i++)
+    {
+        if(e->andar->valor == e->botoes->apertados[i]) {
+            for (int j = i; j < e->botoes->tam - 1; j++)
+            {
+                e->botoes->apertados[j] = e->botoes->apertados[j+1];
+            }
+            (e->botoes->tam)--;
+            e->botoes->apertados = realloc(e->botoes->apertados, sizeof(int)*e->botoes->tam);
+        }
+    }
+
+    // desapertar o botao externo e resetar requisição
+    if(!e->requisicao->requisitado) return;
+    if(e->andar == e->requisicao->requisitado) {
+        if(e->requisicao->direcaoRequisitada == 1) e->andar->botao_subir = 0;
+        if(e->requisicao->direcaoRequisitada == -1) e->andar->botao_descer = 0;
+        e->requisicao->requisitado = NULL;
+        e->requisicao->direcaoRequisitada = 0;
+    }
 }
 
 void limpar_elevadores(Elevador ***e, int m)

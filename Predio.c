@@ -70,7 +70,6 @@ void limpar_predio(Andar **predio) {
     }
     Andar *aux = *predio;
     while(aux->cima) {
-        free(aux->valor);
         aux = aux->cima;
         free(aux->baixo);
     }

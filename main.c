@@ -19,7 +19,7 @@ int main() {
 
     int tempo = 0;
 
-    while(1){
+    while(tempo < 10){
         // atualizar chamadas no predio
         // atualizar chamadas internas de cada elevador
         printf("%d", tempo);
@@ -28,11 +28,10 @@ int main() {
             controlar_porta(elevadores[i]); // simular portas abrindo e botões sendo desapertados
             atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa na direção atual
             definir_direcao(elevadores[i]); // definir se o elevador vai subir(1) ou descer(-1)
-            mover(elevadores[i]); // mover elevador  
+            mover(elevadores[i]); // mover elevador 
         }
         tempo++;
         sleep(1);
-        break;
         // wait 1seg sleep()
     }
 
