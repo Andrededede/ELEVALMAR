@@ -28,6 +28,12 @@ void construir_elevadores(Elevador ***e, Andar *predio, int m)
     }
 }
 
+void apertar_elevador(Elevador *e, int andar){
+    e->botoes->tam++;
+    e->botoes->apertados = realloc(e->botoes->apertados, sizeof(int)*e->botoes->tam);
+    e->botoes->apertados[e->botoes->tam-1] = andar;
+}
+
 void iniciar_elevador(Elevador * e, Andar *predio, char *string)
 {
     char s[255];
@@ -45,22 +51,16 @@ void iniciar_elevador(Elevador * e, Andar *predio, char *string)
     // definir botoes apertados iniciais
     strcpy(s, &s[8]);
     char *p = strtok(s, ",");
-    int tam = 0;
-    int *num = NULL;
     while(p) {
-        tam++;
-        num = realloc(num, sizeof(int)*tam);
-        num[tam-1] = atoi(p);
+        apertar_elevador(e, atoi(p));
         p = strtok(NULL, ",");
     }
-    e->botoes->apertados = num;
-    e->botoes->tam = tam;
 
-    for (int i = 0; i < e->botoes->tam; i++)
-    {
-        printf("%d", e->botoes->apertados[i]);
-    }
-    printf("\ntam: %d\n\n", tam);
+    // for (int i = 0; i < e->botoes->tam; i++)
+    // {
+    //     printf("%d", e->botoes->apertados[i]);
+    // }
+    // printf("\ntam: %d\n\n", e->botoes->tam);
 }
 
 void atribuir(Elevador *e)
