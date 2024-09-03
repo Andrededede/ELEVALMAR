@@ -25,6 +25,7 @@ void construir_elevadores(Elevador ***e, Andar *predio, int m)
         (*(*e + i - 1))->requisicao = malloc(sizeof(Requisicao));
         (*(*e + i - 1))->requisicao->requisitado = NULL;
         (*(*e + i - 1))->requisicao->direcaoRequisitada = 0;
+        (*(*e + i - 1))->cont = 0;
     }
 }
 
@@ -167,6 +168,7 @@ void subir(Elevador *e)
             return;
     }
     e->andar = e->andar->cima;
+    e->cont++;
 }
 
 void descer(Elevador *e)
@@ -176,6 +178,7 @@ void descer(Elevador *e)
             return;
     }
     e->andar = e->andar->baixo;
+    e->cont++;
 }
 
 // void chamar(Elevador *e)
