@@ -79,6 +79,8 @@ void limpar_predio(Andar **predio) {
 
 void chamar(Andar *predio, int valor, int direcao) {
     //direcao é 1 ou -1
+    if(direcao == 1) predio->botao_subir = 1;
+    if(direcao == -1) predio->botao_descer = 1;
     Andar *aux = buscar_andar(&predio, valor);
     if(!aux){
         return;
