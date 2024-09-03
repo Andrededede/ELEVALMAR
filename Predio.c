@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Predio.h"
 
-void iniciar_predio(Andar **predio, int andares)
+void construir_predio(Andar **predio, int andares)
 {
     *predio = NULL;
     for (int i = 0; i < andares; i++)

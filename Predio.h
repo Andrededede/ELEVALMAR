@@ -9,7 +9,7 @@ typedef struct Andar {
     int botao_descer;
 } Andar;
 
-void iniciar_predio(Andar **predio, int andares);
+void construir_predio(Andar **predio, int andares);
 Andar* buscar_andar(Andar **predio, int valor);
 void inserir_f(Andar **predio, int valor);
 void remover_andar(Andar **predio, int valor);

@@ -7,19 +7,35 @@
 
 int main() {
     // Ler String
-    char string[255] = "sadfsaadasd";
-    int n = 20; //andares
-    int m = 5; //elevadores
+    char string[] = "AM_05 E1_04_S_6,9,8  E2_11_D_5,8,9,3,2,T E3_20_D_5,8,T,9 T5_P01_S_4_6 T8_P01_D_6_4 T9_P02_S_5_10 T10_P03_S_3_9 T10_P04_D_6_T T10_P05_S_8_15 T15_P06_D_9_2 T15_P07_S_2_13 T18_P08_D_8_T T21_P01_D_16_3 T21_P10_S_T_13 T21_P11_S_T_12 T23_P12_S_T_15 T28_P13_S_2_13";
+    int n = atoi(&string[3]); // numero de andares
+    int m = 0;
+    for (unsigned int i = 0; i < sizeof(string); i++)
+    {
+        if(string[i] == ' ') string[i] = '\0'; // quebra da string
+        if(string[i] == 'E') m++; // numero de elevadores
+    }
+    n = 25;
+    m = 5;
 
-    // Buildar predio e elevadores
+    // Iniciar predio e elevadores
     Andar *predio;
-    iniciar_predio(&predio, n);
+    construir_predio(&predio, n);
     Elevador **elevadores;
-    iniciar_elevadores(&elevadores, predio, m);
-
+    construir_elevadores(&elevadores, predio, m);
+    for (int i = 0; i < m; i++)
+    {
+        for (unsigned int j = 0; j < sizeof(string); j++)
+        {
+            if(string[j] == 'E' && string[j+1] == i+1+'0') {
+                iniciar_elevador(elevadores[i], predio, &string[j]); // iniciar cada elevador baseado na string
+                break;
+            }
+        }
+    }
+    
     int tempo = 0;
-
-    while(tempo < 10){
+    while(elevadores[2]->botoes->tam > 0){
         // atualizar chamadas no predio
         // atualizar chamadas internas de cada elevador
         printf("%d", tempo);
@@ -28,7 +44,7 @@ int main() {
             controlar_porta(elevadores[i]); // simular portas abrindo e botões sendo desapertados
             atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa na direção atual
             definir_direcao(elevadores[i]); // definir se o elevador vai subir(1) ou descer(-1)
-            mover(elevadores[i]); // mover elevador 
+            mover(elevadores[i]); // mover elevador
         }
         tempo++;
         sleep(1);

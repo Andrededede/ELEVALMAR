@@ -23,7 +23,8 @@ typedef struct Elevador{
 } Elevador;
 
 
-void iniciar_elevadores(Elevador ***e, Andar *predio, int m);
+void construir_elevadores(Elevador ***e, Andar *predio, int m);
+void iniciar_elevador(Elevador *e, Andar *predio, char *string);
 void atribuir(Elevador *e);
 void definir_direcao(Elevador *e);
 void subir(Elevador *e);
