@@ -6,7 +6,7 @@
 void construir_predio(Andar **predio, int andares)
 {
     *predio = NULL;
-    for (int i = 0; i < andares; i++)
+    for (int i = 0; i <= andares; i++)
     {
         inserir_f(predio, i);
     }

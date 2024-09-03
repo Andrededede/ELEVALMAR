@@ -15,8 +15,8 @@ int main() {
         if(string[i] == ' ') string[i] = '\0'; // quebra da string
         if(string[i] == 'E') m++; // numero de elevadores
     }
-    n = 25;
-    m = 5;
+    n = 20;
+    m = 3;
 
     // Iniciar predio e elevadores
     Andar *predio;
