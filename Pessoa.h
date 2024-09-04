@@ -4,14 +4,18 @@
 #include "Predio.h"
 
 typedef struct Pessoa {
-    int id;
+    int tempo;
+    char id[5];
+    int direcao;
     int andar;
     int destino;
-    Pessoa *prox;
+    struct Pessoa *prox;
 } Pessoa;
 
-void inserir_pessoa(Pessoa *p, int id, int andar, int destino);
-void remover_pessoa(Pessoa **p);
-void limpar_pessoas(Pessoa **p);
+char * avancar_string(char *s, char *p, int tam);
+void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, int andar, int destino);
+void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam);
+void remover_pessoa(Pessoa **fila);
+void limpar_pessoas(Pessoa **fila);
 
 #endif

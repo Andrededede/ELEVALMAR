@@ -3,25 +3,7 @@
 #include <string.h>
 #include "Predio.c"
 #include "Elevador.c"
-
-char * avancar_string(char *s, char *p, int tam) {
-    char *aux = s;
-    int cont = 0;
-    while (aux != p) {
-        aux = aux + 1;
-        cont++;
-    }
-    while (*aux != '\0') {
-        aux = aux + 1;
-        cont++;
-    }
-    while (*aux == '\0' && cont!=tam-1) {
-        aux = aux + 1;
-        cont++;
-    }
-    if(cont == tam - 1) return NULL;
-    return aux;
-}
+#include "Pessoa.c"
 
 int main() {
     // Ler String
@@ -35,6 +17,8 @@ int main() {
         if(string[i] == 'E') m++; // numero de elevadores
     }
     ps = avancar_string(string, ps, sizeof(string));
+    printf("%d\n\n", sizeof(*ps));
+
 
     // Iniciar predio e elevadores
     Andar *predio;
@@ -46,6 +30,10 @@ int main() {
         iniciar_elevador(elevadores[i], predio, ps);
         ps = avancar_string(string, ps, sizeof(string));
     }
+
+    // Iniciar pessoas
+    Pessoa *f = NULL;
+    iniciar_pessoas(&f, &ps, &string[0], sizeof(string)); // faz uma fila com as pessoas e seus tempos
 
     int tempo = 0;
     while(tempo < 2){
