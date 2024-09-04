@@ -43,7 +43,7 @@ void iniciar_elevador(Elevador * e, Andar *predio, char *string)
     {
         if(s[i] == 'T') s[i] = '0';
     }
-    e->andar = buscar_andar(&predio, atoi(&s[3])); // definir andar inicial
+    e->andar = buscar_andar(predio, atoi(&s[3])); // definir andar inicial
     for (unsigned int i = 0; i < sizeof(s); i++) // definir direção inicial
     {
         if(s[i] == 'S') e->direcao = 1;

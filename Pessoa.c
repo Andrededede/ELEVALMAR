@@ -22,7 +22,7 @@ char * avancar_string(char *s, char *p, int tam) {
     return aux;
 }
 
-void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, int andar, int destino)
+void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, Andar *andar, int destino)
 {
     Pessoa *aux = malloc(sizeof(Pessoa));
     aux->tempo = tempo;
@@ -42,7 +42,7 @@ void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, int andar
     }
 }
 
-void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam)
+void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, Andar *predio)
 {
     while(*ps) {
         int tam = strlen(*ps);
@@ -59,12 +59,12 @@ void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam)
         if((*ps)[0] == 'S') direcao = 1;
         if((*ps)[0] == 'D') direcao = -1;
         *ps = avancar_string(string, *ps, string_tam);
-        int andar = atoi(*ps);
+        Andar *andar = buscar_andar(predio, atoi(*ps));
         *ps = avancar_string(string, *ps, string_tam);
         int destino = atoi(*ps);
         *ps = avancar_string(string, *ps, string_tam);
         
-        printf("tempo:%d\nid:%s\ndirecao:%d\nandar:%d\ndestino:%d\n\n", tempo, id, direcao, andar, destino);
+        printf("tempo:%d\nid:%s\ndirecao:%d\nandar:%d\ndestino:%d\n\n", tempo, id, direcao, andar->valor, destino);
 
         inserir_pessoa(fila, tempo, id, direcao, andar, destino);
     }

@@ -33,13 +33,25 @@ int main() {
 
     // Iniciar pessoas
     Pessoa *f = NULL;
-    iniciar_pessoas(&f, &ps, &string[0], sizeof(string)); // faz uma fila com as pessoas e seus tempos
+    iniciar_pessoas(&f, &ps, &string[0], sizeof(string), predio); // faz uma fila com as pessoas e seus tempos
 
     int tempo = 0;
-    while(tempo < 2){
+    while(tempo < 30){
+        printf("tempo %d\n", tempo);
         // atualizar chamadas no predio
+        while(f && f->tempo == tempo) {
+            if(f->direcao == 1) {
+                inserir_pessoa(&f->andar->fila_s, f->tempo, f->id, f->direcao, f->andar, f->destino);
+                if(f->andar->botao_subir == 0) f->andar->botao_subir = 1;
+            }
+            if(f->direcao == -1) {
+                inserir_pessoa(&f->andar->fila_d, f->tempo, f->id, f->direcao, f->andar, f->destino);
+                printf("\n\n%d  %s\n\n", f->andar->valor, f->andar->fila_d->id);
+                if(f->andar->botao_descer == 0) f->andar->botao_descer = 1;
+            }
+            remover_pessoa(&f);
+        }
         // atualizar chamadas internas de cada elevador
-        printf("%d", tempo);
         for (int i = 0; i < m; i++)
         {
             controlar_porta(elevadores[i]); // simular portas abrindo e botões sendo desapertados

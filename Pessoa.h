@@ -7,14 +7,14 @@ typedef struct Pessoa {
     int tempo;
     char id[5];
     int direcao;
-    int andar;
+    struct Andar *andar;
     int destino;
     struct Pessoa *prox;
 } Pessoa;
 
 char * avancar_string(char *s, char *p, int tam);
-void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, int andar, int destino);
-void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam);
+void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, struct Andar *andar, int destino);
+void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, struct Andar *predio);
 void remover_pessoa(Pessoa **fila);
 void limpar_pessoas(Pessoa **fila);
 
