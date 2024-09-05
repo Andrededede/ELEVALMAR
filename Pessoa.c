@@ -98,6 +98,15 @@ Pessoa *buscar_pessoa(Pessoa *lista, char id[5])
     return aux;
 }
 
+Pessoa *no_anterior(Pessoa *lista, Pessoa *no){
+    Pessoa *aux = no;
+    Pessoa *aux2 = lista;
+    while(aux2 && aux2->prox && aux2->prox != aux){
+        aux2 = aux2->prox;
+    }
+    return aux2;
+}
+
 void remover_pessoa(Pessoa **fila)
 {
     Pessoa *aux = *fila;
@@ -107,14 +116,12 @@ void remover_pessoa(Pessoa **fila)
 }
 
 void removerL_pessoa(Pessoa **lista, char id[5])
-{
+{   
     Pessoa *aux = buscar_pessoa(*lista, id);
-    Pessoa *aux2 = *lista;
-    if(!aux2) return;
-    while(aux->prox && ){
-        aux2 = aux2->prox;
-    }
-    return aux;
+    Pessoa *aux2 = no_anterior(*lista, aux);
+    if(!aux) return;
+    aux2->prox = aux->prox;
+    free(aux);
 }
 
 void limpar_pessoas(Pessoa **fila)
