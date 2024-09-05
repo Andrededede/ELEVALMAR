@@ -28,7 +28,7 @@ void inserir_f(Andar **predio, int valor)
     aux->cima = NULL;
     aux->baixo = NULL;
     aux->botao_subir = 0;
-    aux->botao_subir = 0;
+    aux->botao_descer = 0;
     aux->fila_s = NULL;
     aux->fila_d = NULL;
 

@@ -91,6 +91,7 @@ void atribuir(Elevador *e)
             aux = aux->cima;
         }
         if(aux) { // achou requisição
+            printf("\n\nalguem querendo descer\n\n\n");
             if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == -1) { // ja tenho uma req na direção
                 if(e->requisicao->requisitado->valor > aux->valor) return; // a minha é melhor
                 if(e->requisicao->requisitado->valor < aux->valor) e->requisicao->requisitado->botao_descer = 1; // a minha é pior, desisto dela
@@ -188,7 +189,10 @@ void descer(Elevador *e)
 
 void mover(Elevador *e)
 {
-    if (!e->requisicao->requisitado && !e->botoes->apertados) e->direcao = -1;
+    if (!e->requisicao->requisitado && !e->botoes->apertados) {
+        e->direcao = e->direcao * -1;
+        return;
+    }
     if (e->direcao == 1) {
         subir(e);
     }
@@ -255,12 +259,9 @@ int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio)
     for (int i = 0; i < m; i++)
     {
         if(elevadores[i]->botoes->apertados) return 0;
+        if(elevadores[i]->requisicao->requisitado) return 0;
     }
     Andar *aux = predio;
-    while(aux) {
-        if(aux->botao_subir > 0 || aux->botao_descer > 0) return 0;
-        aux = aux->cima;
-    }
     return 1;
 }
 
