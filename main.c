@@ -42,16 +42,12 @@ int main() {
         // chamar_elevador(&f, tempo);
         while(f && f->tempo == tempo) {
             if(f->direcao == 1) {
-                inserir_pessoa(&(f->andar->fila_s), f->tempo, f->id, f->direcao, f->andar, f->destino);
                 if(f->andar->botao_subir == 0) f->andar->botao_subir = 1;
-                printf("\n\n%d  %s\n\n", f->andar->valor, f->andar->fila_s->id);
-            }
-            if(f->direcao == -1) {
-                inserir_pessoa(&(f->andar->fila_d), f->tempo, f->id, f->direcao, f->andar, f->destino);
+                tranferir_pessoa(&f, &(f->andar->fila_s));
+            } else if(f->direcao == -1) {
                 if(f->andar->botao_descer == 0) f->andar->botao_descer = 1;
-                printf("\n\n%d  %s\n\n", f->andar->valor, f->andar->fila_d->id);
+                tranferir_pessoa(&f, &(f->andar->fila_d));
             }
-            remover_pessoa(&f);
         }
         // atualizar chamadas internas de cada elevador
         for (int i = 0; i < m; i++)

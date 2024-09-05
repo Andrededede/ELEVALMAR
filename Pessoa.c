@@ -70,6 +70,25 @@ void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, And
     }
 }
 
+void tranferir_pessoa(Pessoa **origem, Pessoa **destino)
+{
+    Pessoa *aux = *origem;
+    if (!aux) return;
+    *origem = aux->prox;
+    aux->prox = NULL;
+    if(!(*destino)) *destino = aux;
+    else {
+        Pessoa *aux2 = *destino;
+        while(aux2->prox) {
+            aux2 = aux2->prox;
+        }
+        aux2->prox = aux;
+    }
+    if((*destino)){
+        printf("\n\n%d  %s  %d  %d\n\n", (*destino)->andar->valor, (*destino)->id, (*destino)->direcao, (*destino)->tempo);
+    }
+}
+
 void remover_pessoa(Pessoa **fila)
 {
     Pessoa *aux = *fila;
