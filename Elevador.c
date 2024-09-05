@@ -211,15 +211,33 @@ void controlar_porta(Elevador *e)
             e->botoes->apertados = realloc(e->botoes->apertados, sizeof(int)*e->botoes->tam);
         }
     }
+    // remover pessoa que quer descer
 
-    // desapertar o botao externo e resetar requisição
+    // desapertar o botao externo e resetar requisição e apertar botao de quem entra
     if(!e->requisicao->requisitado) return;
     if(e->andar == e->requisicao->requisitado) {
-        if(e->requisicao->direcaoRequisitada == 1) e->andar->botao_subir = 0;
-        if(e->requisicao->direcaoRequisitada == -1) e->andar->botao_descer = 0;
+        if(e->requisicao->direcaoRequisitada == 1) {
+            e->andar->botao_subir = 0;
+            while(e->andar->fila_s) {
+                apertar_elevador(e, e->andar->fila_s->destino);
+                remover_pessoa(&(e->andar->fila_s));
+            }
+        }
+        if(e->requisicao->direcaoRequisitada == -1) {
+            e->andar->botao_descer = 0;
+            while(e->andar->fila_d) {
+                apertar_elevador(e, e->andar->fila_d->destino);
+                remover_pessoa(&(e->andar->fila_d));
+            }
+        }
         e->requisicao->requisitado = NULL;
         e->requisicao->direcaoRequisitada = 0;
     }
+
+
+
+    // trasnsferir todas as pessoas da fila correspondete para o elevador
+    
 }
 
 int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio)
