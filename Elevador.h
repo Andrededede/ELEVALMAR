@@ -19,7 +19,8 @@ typedef struct Elevador{
     int direcao;
     Botoes *botoes; //botões apertados
     Requisicao *requisicao;
-    int cont;
+    Pessoa *passageiros;
+    int energia;
     //char *rota;
 } Elevador;
 

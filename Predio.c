@@ -45,15 +45,15 @@ void inserir_f(Andar **predio, int valor)
     else *predio = aux;
 }
 
-void chamar_elevador(Pessoa **f, int tempo)
+void chamar_elevador(Pessoa **f, unsigned long int tempo)
 {
     while((*f) && (*f)->tempo == tempo) {
             if((*f)->direcao == 1) {
                 if((*f)->andar->botao_subir == 0) (*f)->andar->botao_subir = 1;
-                tranferir_pessoa(f, &((*f)->andar->fila_s));
+                tranferir_pessoa(f, &((*f)->andar->fila_s), *f);
             } else if((*f)->direcao == -1) {
                 if((*f)->andar->botao_descer == 0) (*f)->andar->botao_descer = 1;
-                tranferir_pessoa(f, &((*f)->andar->fila_d));
+                tranferir_pessoa(f, &((*f)->andar->fila_d), *f);
             }
         }
 }

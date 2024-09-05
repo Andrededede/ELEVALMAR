@@ -25,7 +25,7 @@ void construir_elevadores(Elevador ***e, Andar *predio, int m)
         (*(*e + i - 1))->requisicao = malloc(sizeof(Requisicao));
         (*(*e + i - 1))->requisicao->requisitado = NULL;
         (*(*e + i - 1))->requisicao->direcaoRequisitada = 0;
-        (*(*e + i - 1))->cont = 0;
+        (*(*e + i - 1))->energia = 0;
     }
 }
 
@@ -56,12 +56,6 @@ void iniciar_elevador(Elevador * e, Andar *predio, char *string)
         apertar_elevador(e, atoi(p));
         p = strtok(NULL, ",");
     }
-
-    // for (int i = 0; i < e->botoes->tam; i++)
-    // {
-    //     printf("%d", e->botoes->apertados[i]);
-    // }
-    // printf("\ntam: %d\n\n", e->botoes->tam);
 }
 
 void atribuir(Elevador *e)
@@ -169,7 +163,7 @@ void subir(Elevador *e)
             return;
     }
     e->andar = e->andar->cima;
-    e->cont++;
+    e->energia++;
 }
 
 void descer(Elevador *e)
@@ -179,7 +173,7 @@ void descer(Elevador *e)
             return;
     }
     e->andar = e->andar->baixo;
-    e->cont++;
+    e->energia++;
 }
 
 // void chamar(Elevador *e)
@@ -215,7 +209,6 @@ void controlar_porta(Elevador *e)
             e->botoes->apertados = realloc(e->botoes->apertados, sizeof(int)*e->botoes->tam);
         }
     }
-    // remover pessoa que quer descer
 
     // desapertar o botao externo e resetar requisição e apertar botao de quem entra
     if(!e->requisicao->requisitado) return;
@@ -224,22 +217,19 @@ void controlar_porta(Elevador *e)
             e->andar->botao_subir = 0;
             while(e->andar->fila_s) {
                 apertar_elevador(e, e->andar->fila_s->destino);
-                remover_pessoa(&(e->andar->fila_s));
+                tranferir_pessoa(&(e->andar->fila_s), &(e->passageiros), (e->andar->fila_s));
             }
         }
         if(e->requisicao->direcaoRequisitada == -1) {
             e->andar->botao_descer = 0;
             while(e->andar->fila_d) {
                 apertar_elevador(e, e->andar->fila_d->destino);
-                remover_pessoa(&(e->andar->fila_d));
+                tranferir_pessoa(&(e->andar->fila_d), &(e->passageiros), (e->andar->fila_d));
             }
         }
         e->requisicao->requisitado = NULL;
         e->requisicao->direcaoRequisitada = 0;
     }
-
-
-
     // trasnsferir todas as pessoas da fila correspondete para o elevador
     
 }

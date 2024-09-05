@@ -70,20 +70,16 @@ void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, And
     }
 }
 
-void tranferir_pessoa(Pessoa **origem, Pessoa **destino)
-{
-    Pessoa *aux = *origem;
-    if (!aux) return;
-    *origem = aux->prox;
-    aux->prox = NULL;
-    if(!(*destino)) *destino = aux;
-    else {
-        Pessoa *aux2 = *destino;
-        while(aux2->prox) {
-            aux2 = aux2->prox;
-        }
-        aux2->prox = aux;
+void tranferir_pessoa(Pessoa **origem, Pessoa **destino, Pessoa *p)
+{   
+    Pessoa *aux = no_anterior(*origem, p);
+    if(*origem == p){
+        *origem = p->prox;
+    } else{
+        if(!aux) return;
+        aux->prox = p->prox;
     }
+    inserirNo_pessoa(destino, p);
     if((*destino)){
         printf("\n\n%d  %s  %d  %d\n\n", (*destino)->andar->valor, (*destino)->id, (*destino)->direcao, (*destino)->tempo);
     }
@@ -107,7 +103,19 @@ Pessoa *no_anterior(Pessoa *lista, Pessoa *no){
     return aux2;
 }
 
-void remover_pessoa(Pessoa **fila)
+void inserirNo_pessoa(Pessoa **lista, Pessoa *p){
+    p->prox = NULL;
+    if(!(*lista)) *lista = p;
+    else {
+        Pessoa *aux = *lista;
+        while(aux->prox) {
+            aux = aux->prox;
+        }
+        aux->prox = p;
+    }
+}
+
+void remover_pessoa_C(Pessoa **fila)
 {
     Pessoa *aux = *fila;
     if (!aux) return;
@@ -115,7 +123,7 @@ void remover_pessoa(Pessoa **fila)
     free(aux);
 }
 
-void removerL_pessoa(Pessoa **lista, char id[5])
+void remover_pessoa(Pessoa **lista, char id[5])
 {   
     Pessoa *aux = buscar_pessoa(*lista, id);
     Pessoa *aux2 = no_anterior(*lista, aux);
@@ -127,6 +135,6 @@ void removerL_pessoa(Pessoa **lista, char id[5])
 void limpar_pessoas(Pessoa **fila)
 {
     while (*fila) {
-        remover_pessoa(fila);
+        remover_pessoa_C(fila);
     }
 }
