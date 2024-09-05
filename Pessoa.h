@@ -17,6 +17,7 @@ void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, struct An
 void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, struct Andar *predio);
 void tranferir_pessoa(Pessoa **origem, Pessoa **destino);
 Pessoa * buscar_pessoa(Pessoa *lista, char id[5]);
+Pessoa *no_anterior(Pessoa *lista, Pessoa *no);
 void remover_pessoa(Pessoa **fila);
 void removerL_pessoa(Pessoa **lista, char id[5]);
 void limpar_pessoas(Pessoa **fila);
