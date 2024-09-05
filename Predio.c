@@ -85,8 +85,8 @@ void listar_andares(Andar *predio) {
                     aux2 = aux2->prox;
                 }
             }
-            if (aux->fila_s) {
-                aux2 = aux->fila_s;
+            if (aux->fila_d) {
+                aux2 = aux->fila_d;
                 while(aux2) {
                     printf(" %s ", aux2->id);
                     aux2 = aux2->prox;

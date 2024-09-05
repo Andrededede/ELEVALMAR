@@ -36,8 +36,11 @@ int main() {
     iniciar_pessoas(&f, &ps, &string[0], sizeof(string), predio); // faz uma fila com as pessoas e seus tempos
 
     int tempo = 0;
-    while(tempo < 30){
+    while(1){
         printf("tempo %d\n", tempo);
+        listar_andares(predio);
+        printf("\n");
+        listar_elevadores(elevadores, m);
         chamar_elevador(&f, tempo); // atualizar chamadas no predio
         // atualizar chamadas internas de cada elevador
         for (int i = 0; i < m; i++)
@@ -47,6 +50,7 @@ int main() {
             definir_direcao(elevadores[i]); // definir se o elevador vai subir(1) ou descer(-1)
             mover(elevadores[i]); // mover elevador
         }
+        if(encerrar(f, elevadores, m, predio)) break;
         tempo++;
         sleep(1);
         // wait 1seg sleep()

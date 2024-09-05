@@ -240,6 +240,15 @@ void controlar_porta(Elevador *e)
     
 }
 
+void listar_elevadores(Elevador **elevadores, int m)
+{
+    for (int i = 0; i < m; i++)
+    {
+        printf("%s: %d, %d\n", elevadores[i]->nome, elevadores[i]->andar->valor, elevadores[i]->direcao);
+    }
+    
+}
+
 int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio)
 {   
     if (fila) return 0;
