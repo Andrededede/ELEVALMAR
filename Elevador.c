@@ -222,6 +222,21 @@ void controlar_porta(Elevador *e)
     }
 }
 
+int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio)
+{   
+    if (fila) return 0;
+    for (int i = 0; i < m; i++)
+    {
+        if(elevadores[i]->botoes->apertados) return 0;
+    }
+    Andar *aux = predio;
+    while(aux) {
+        if(aux->botao_subir > 0 || aux->botao_descer > 0) return 0;
+        aux = aux->cima;
+    }
+    return 1;
+}
+
 void limpar_elevadores(Elevador ***e, int m)
 {
     for (int i = 0; i < m; i++)
