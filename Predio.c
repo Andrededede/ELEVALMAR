@@ -45,21 +45,16 @@ void inserir_f(Andar **predio, int valor)
     else *predio = aux;
 }
 
-void chamar_elevador(Pessoa **fila, int tempo)
+void chamar_elevador(Pessoa **f, int tempo)
 {
-    Pessoa *f = *fila;
-    while(f && f->tempo == tempo) {
-            if(f->direcao == 1) {
-                inserir_pessoa(&(f->andar->fila_s), f->tempo, f->id, f->direcao, f->andar, f->destino);
-                if(f->andar->botao_subir == 0) f->andar->botao_subir = 1;
-                printf("\n\n%d  %s\n\n", f->andar->valor, f->andar->fila_s->id);
+    while((*f) && (*f)->tempo == tempo) {
+            if((*f)->direcao == 1) {
+                if((*f)->andar->botao_subir == 0) (*f)->andar->botao_subir = 1;
+                tranferir_pessoa(f, &((*f)->andar->fila_s));
+            } else if((*f)->direcao == -1) {
+                if((*f)->andar->botao_descer == 0) (*f)->andar->botao_descer = 1;
+                tranferir_pessoa(f, &((*f)->andar->fila_d));
             }
-            if(f->direcao == -1) {
-                inserir_pessoa(&(f->andar->fila_d), f->tempo, f->id, f->direcao, f->andar, f->destino);
-                if(f->andar->botao_descer == 0) f->andar->botao_descer = 1;
-                printf("\n\n%d  %s\n\n", f->andar->valor, f->andar->fila_d->id);
-            }
-            remover_pessoa(fila);
         }
 }
 

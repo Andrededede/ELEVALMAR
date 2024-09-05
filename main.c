@@ -38,17 +38,7 @@ int main() {
     int tempo = 0;
     while(tempo < 30){
         printf("tempo %d\n", tempo);
-        // atualizar chamadas no predio
-        // chamar_elevador(&f, tempo);
-        while(f && f->tempo == tempo) {
-            if(f->direcao == 1) {
-                if(f->andar->botao_subir == 0) f->andar->botao_subir = 1;
-                tranferir_pessoa(&f, &(f->andar->fila_s));
-            } else if(f->direcao == -1) {
-                if(f->andar->botao_descer == 0) f->andar->botao_descer = 1;
-                tranferir_pessoa(&f, &(f->andar->fila_d));
-            }
-        }
+        chamar_elevador(&f, tempo); // atualizar chamadas no predio
         // atualizar chamadas internas de cada elevador
         for (int i = 0; i < m; i++)
         {
