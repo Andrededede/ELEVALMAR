@@ -89,12 +89,32 @@ void tranferir_pessoa(Pessoa **origem, Pessoa **destino)
     }
 }
 
+Pessoa *buscar_pessoa(Pessoa *lista, char id[5])
+{
+    Pessoa *aux = lista;
+    while(aux && strcmp(aux->id,id)){
+        aux = aux->prox;
+    }
+    return aux;
+}
+
 void remover_pessoa(Pessoa **fila)
 {
     Pessoa *aux = *fila;
     if (!aux) return;
     *fila = aux->prox;
     free(aux);
+}
+
+void removerL_pessoa(Pessoa **lista, char id[5])
+{
+    Pessoa *aux = buscar_pessoa(*lista, id);
+    Pessoa *aux2 = *lista;
+    if(!aux2) return;
+    while(aux->prox && ){
+        aux2 = aux2->prox;
+    }
+    return aux;
 }
 
 void limpar_pessoas(Pessoa **fila)
