@@ -132,8 +132,11 @@ void remover_pessoa(Pessoa **lista, char id[5])
     free(aux);
 }
 
-void limpar_pessoas(Pessoa **fila)
+void limpar_pessoas(Pessoa **fila, int n)
 {
+    for(int i = 0; i < n; i++){
+
+    }
     while (*fila) {
         remover_pessoa_C(fila);
     }

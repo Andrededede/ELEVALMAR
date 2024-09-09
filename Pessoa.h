@@ -20,6 +20,6 @@ Pessoa * buscar_pessoa(Pessoa *lista, char id[5]);
 Pessoa *no_anterior(Pessoa *lista, Pessoa *no);
 void remover_pessoa_C(Pessoa **fila);
 void remover_pessoa(Pessoa **lista, char id[5]);
-void limpar_pessoas(Pessoa **fila);
+void limpar_pessoas(Pessoa **fila, int n);
 
 #endif
