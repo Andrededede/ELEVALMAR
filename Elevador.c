@@ -217,6 +217,7 @@ void controlar_porta(Elevador *e)
             e->andar->botao_subir = 0;
             while(e->andar->fila_s) {
                 apertar_elevador(e, e->andar->fila_s->destino);
+                // remover_pessoa_C(&(e->andar->fila_s));
                 tranferir_pessoa(&(e->andar->fila_s), &(e->passageiros), (e->andar->fila_s));
             }
         }
@@ -224,6 +225,7 @@ void controlar_porta(Elevador *e)
             e->andar->botao_descer = 0;
             while(e->andar->fila_d) {
                 apertar_elevador(e, e->andar->fila_d->destino);
+                // remover_pessoa_C(&(e->andar->fila_d));
                 tranferir_pessoa(&(e->andar->fila_d), &(e->passageiros), (e->andar->fila_d));
             }
         }

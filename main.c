@@ -7,7 +7,7 @@
 
 int main() {
     // Ler String
-    char string[] = "AM_20 E1_04_S_6,9,8 E2_11_D_5,8,9,3,2,T E3_20_D_5,8,T,9 T5_P01_S_4_6 T8_P01_D_6_4 T9_P02_S_5_10 T10_P03_S_3_9 T10_P04_D_6_T T10_P05_S_8_15 T15_P06_D_9_2 T15_P07_S_2_13 T18_P08_D_8_T T21_P01_D_16_3 T21_P10_S_T_13 T21_P11_S_T_12 T23_P12_S_T_15 T28_P13_S_2_13";
+    char string[] = "AM_25 E1_01_S_05,10,15,20,25 E2_25_D_20,15,10,5 E3_13_S_18,23 E4_17_D_22,12,07 E5_09_S_11,16,21 T1_P01_S_03_10 T3_P02_D_12_08 T5_P03_S_15_20 T7_P04_D_22_16 T9_P05_S_18_25 T11_P06_D_13_07 T13_P07_S_05_12 T15_P08_D_20_10 T17_P09_S_08_15 T19_P10_D_18_07 T21_P11_S_11_21 T23_P12_D_25_13 T25_P13_S_06_20 T27_P14_D_22_10 T29_P15_S_14_23 T31_P16_D_18_09 T33_P17_S_07_19 T35_P18_D_20_12 T37_P19_S_13_25 T39_P20_D_15_05 T41_P21_S_09_16 T43_P22_D_23_14 T45_P23_S_18_25 T47_P24_D_12_08 T49_P25_S_11_20 T51_P26_D_17_09 T53_P27_S_14_21 T55_P28_D_22_15 T57_P29_S_07_19 T59_P30_D_23_13 T61_P31_S_05_16 T63_P32_D_18_07 T65_P33_S_20_25 T67_P34_D_25_17 T69_P35_S_08_14 T71_P36_D_22_10 T73_P37_S_11_21 T75_P38_D_20_15 T77_P39_S_13_25 T79_P40_D_18_12 T81_P41_S_06_17 T83_P42_D_23_14 T85_P43_S_12_20 T87_P44_D_22_08 T89_P45_S_07_16 T91_P46_D_20_10 T93_P47_S_11_25 T95_P48_D_23_14 T97_P49_S_09_19 T99_P50_D_18_07";
     char *ps = string;
     int n = atoi(&ps[3]); // numero de andares
     int m = 0;
@@ -51,7 +51,7 @@ int main() {
         }
         if(encerrar(f, elevadores, m, predio)) break;
         tempo++;
-        sleep(1); // wait 1seg
+        // sleep(1); // wait 1seg
     }
 
     printf("\nOs elevadores levaram %d segundos para entregar todas as pessoas a seus destinos.\n", tempo);
