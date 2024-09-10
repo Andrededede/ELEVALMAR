@@ -36,7 +36,7 @@ void descer(Elevador *e);
 void mover(Elevador *e);
 void controlar_porta(Elevador *e);
 void listar_elevadores(Elevador **elevadores, int m);
-int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio);
+int encerrar(Pessoa *fila, Elevador **elevadores, int m);
 void limpar_elevadores(Elevador ***e, int m);
 
 #endif

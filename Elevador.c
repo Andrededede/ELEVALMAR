@@ -245,7 +245,7 @@ void listar_elevadores(Elevador **elevadores, int m)
     
 }
 
-int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio)
+int encerrar(Pessoa *fila, Elevador **elevadores, int m)
 {   
     if (fila) return 0;
     for (int i = 0; i < m; i++)
@@ -253,7 +253,6 @@ int encerrar(Pessoa *fila, Elevador **elevadores, int m, Andar *predio)
         if(elevadores[i]->botoes->apertados) return 0;
         if(elevadores[i]->requisicao->requisitado) return 0;
     }
-    Andar *aux = predio;
     return 1;
 }
 

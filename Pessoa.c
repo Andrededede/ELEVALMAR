@@ -81,7 +81,7 @@ void tranferir_pessoa(Pessoa **origem, Pessoa **destino, Pessoa *p)
     }
     inserirNo_pessoa(destino, p);
     if((*destino)){
-        printf("\n\n%d  %s  %d  %d\n\n", (*destino)->andar->valor, (*destino)->id, (*destino)->direcao, (*destino)->tempo);
+        printf("\n\n%d  %s  %d  %ld\n\n", (*destino)->andar->valor, (*destino)->id, (*destino)->direcao, (*destino)->tempo);
     }
 }
 

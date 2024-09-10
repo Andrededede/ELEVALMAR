@@ -49,7 +49,7 @@ int main() {
             definir_direcao(elevadores[i]); // definir se o elevador vai subir(1) ou descer(-1)
             mover(elevadores[i]); // mover elevador
         }
-        if(encerrar(f, elevadores, m, predio)) break;
+        if(encerrar(f, elevadores, m)) break;
         tempo++;
         // sleep(1); // wait 1seg
     }
