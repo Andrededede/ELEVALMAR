@@ -79,10 +79,7 @@ void tranferir_pessoa(Pessoa **origem, Pessoa **destino, Pessoa *p)
         if(!aux) return;
         aux->prox = p->prox;
     }
-    inserirNo_pessoa(destino, p);
-    if((*destino)){
-        printf("\n\n%d  %s  %d  %ld\n\n", (*destino)->andar->valor, (*destino)->id, (*destino)->direcao, (*destino)->tempo);
-    }
+    inserir_no_pessoa_f(destino, p);
 }
 
 Pessoa *buscar_pessoa(Pessoa *lista, char id[5])
@@ -103,16 +100,17 @@ Pessoa *no_anterior(Pessoa *lista, Pessoa *no){
     return aux2;
 }
 
-void inserirNo_pessoa(Pessoa **lista, Pessoa *p){
+void inserir_no_pessoa_f(Pessoa **lista, Pessoa *p){
     p->prox = NULL;
-    if(!(*lista)) *lista = p;
-    else {
-        Pessoa *aux = *lista;
-        while(aux->prox) {
-            aux = aux->prox;
-        }
-        aux->prox = p;
+    if(!(*lista)) {
+        *lista = p;
+        return;
     }
+    Pessoa *aux = *lista;
+    while(aux->prox) {
+        aux = aux->prox;
+    }
+    aux->prox = p;
 }
 
 void remover_pessoa_C(Pessoa **fila)

@@ -14,7 +14,7 @@ typedef struct Pessoa {
 
 char * avancar_string(char *s, char *p, int tam);
 void inserir_pessoa(Pessoa **fila, int tempo, char id[5], int direcao, struct Andar *andar, int destino);
-void inserirNo_pessoa(Pessoa **lista, Pessoa *p);
+void inserir_no_pessoa_f(Pessoa **lista, Pessoa *p);
 void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, struct Andar *predio);
 void tranferir_pessoa(Pessoa **origem, Pessoa **destino, Pessoa *p);
 Pessoa * buscar_pessoa(Pessoa *lista, char id[5]);
