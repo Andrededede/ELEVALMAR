@@ -54,7 +54,7 @@ int main() {
         // sleep(1); // wait 1seg
     }
 
-    printf("\nOs elevadores levaram %d segundos para entregar todas as pessoas a seus destinos.\n", tempo);
+    printf("\nOs elevadores levaram %ld segundos para entregar todas as pessoas a seus destinos.\n", tempo);
     
     //Limpar Memoria
     limpar_elevadores(&elevadores, m);
