@@ -4,7 +4,7 @@
 #include "Predio.h"
 
 typedef struct Pessoa {
-    int tempo;
+    unsigned long int tempo;
     char id[5];
     int direcao;
     struct Andar *andar;
