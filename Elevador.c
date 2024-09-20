@@ -202,6 +202,16 @@ void controlar_porta(Elevador *e)
     for (int i = 0; i < e->botoes->tam; i++)
     {
         if(e->andar->valor == e->botoes->apertados[i]) {
+            //tranferir pessoa para chegados do andar
+            Pessoa *aux = e->passageiros;
+            while(aux){
+                Pessoa *aux2 = aux->prox;
+                if(aux->destino == e->andar->valor){
+                    tranferir_pessoa(&(e->passageiros), &(e->andar->chegados), aux);
+                }   
+                aux = aux2;
+            }
+            //desapertar botao do elevador
             for (int j = i; j < e->botoes->tam - 1; j++)
             {
                 e->botoes->apertados[j] = e->botoes->apertados[j+1];

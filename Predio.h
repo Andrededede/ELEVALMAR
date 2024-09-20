@@ -11,6 +11,7 @@ typedef struct Andar {
     int botao_descer;
     Pessoa *fila_s;
     Pessoa *fila_d;
+    Pessoa *chegados;
 } Andar;
 
 void construir_predio(Andar **predio, int andares);

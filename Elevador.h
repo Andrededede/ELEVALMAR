@@ -3,6 +3,12 @@
 
 #include "Predio.h"
 
+typedef struct rota{
+    unsigned long int tempo;
+    Andar andar;
+    struct rota *prox;
+} Rota;
+
 typedef struct requisicao{
     Andar *requisitado;
     int direcaoRequisitada; //0 ou 1 ou -1
@@ -21,7 +27,7 @@ typedef struct Elevador{
     Requisicao *requisicao;
     Pessoa *passageiros;
     int energia;
-    //char *rota;
+    Rota *rota;
 } Elevador;
 
 

@@ -94,8 +94,14 @@ Pessoa *buscar_pessoa(Pessoa *lista, char id[5])
 Pessoa *no_anterior(Pessoa *lista, Pessoa *no){
     Pessoa *aux = no;
     Pessoa *aux2 = lista;
+    if(aux == aux2){
+        return NULL;
+    }
     while(aux2 && aux2->prox && aux2->prox != aux){
         aux2 = aux2->prox;
+    }
+    if(!aux2->prox){
+        return NULL;
     }
     return aux2;
 }

@@ -31,6 +31,7 @@ void inserir_f(Andar **predio, int valor)
     aux->botao_descer = 0;
     aux->fila_s = NULL;
     aux->fila_d = NULL;
+    aux->chegados = NULL;
 
     Andar *aux2  = *predio;
     while(aux2 && aux2->cima) {
