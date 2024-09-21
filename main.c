@@ -63,7 +63,7 @@ int main() {
     printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-\n\n");
     mostrar_rotas(elevadores, m);
     printf("\nTempo Total: %ld segundos\n", tempo);
-    printf("Energia Total consumida: %d", energia);
+    printf("Energia Total consumida: %ld\n", energia);
     //Limpar Memoria
     limpar_elevadores(&elevadores, m);
     limpar_predio(&predio);
