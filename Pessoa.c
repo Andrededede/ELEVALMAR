@@ -63,9 +63,6 @@ void iniciar_pessoas(Pessoa **fila, char **ps, char *string, int string_tam, And
         *ps = avancar_string(string, *ps, string_tam);
         int destino = atoi(*ps);
         *ps = avancar_string(string, *ps, string_tam);
-        
-        printf("tempo:%d\nid:%s\ndirecao:%d\nandar:%d\ndestino:%d\n\n", tempo, id, direcao, andar->valor, destino);
-
         inserir_pessoa(fila, tempo, id, direcao, andar, destino);
     }
 }

@@ -281,6 +281,7 @@ void listar_elevadores(Elevador **elevadores, int m)
 {
     for (int i = 0; i < m; i++)
     {
+        printf("---------------------------------------------------\n");
         printf("%s: %d, %d\n", elevadores[i]->nome, elevadores[i]->andar->valor, elevadores[i]->direcao);
         printf("Botoes apertados: ");
         for(int j = 0; j < elevadores[i]->botoes->tam; j++){

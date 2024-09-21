@@ -43,7 +43,7 @@ int main() {
     unsigned long int tempo = 0;
     while(1){
         chamar_elevador(&f, tempo); // atualizar chamadas no predio
-        printf("\ntempo %ld\n", tempo);
+        printf("\n(%ld)\n", tempo);
         listar_andares(predio);
         listar_elevadores(elevadores, m);
         for (int i = 0; i < m; i++)
@@ -73,8 +73,6 @@ int main() {
     //Limpar Memoria
     limpar_elevadores(&elevadores, m);
     limpar_predio(&predio);
-    while(f){
-        limpar_pessoas(&f);
-    }
+    limpar_pessoas(&f);
     return 0;
 }
