@@ -37,28 +37,39 @@ int main() {
 
     unsigned long int tempo = 0;
     while(1){
-        printf("tempo %ld\n", tempo);
-        listar_andares(predio);
-        printf("\n");
-        listar_elevadores(elevadores, m);
         chamar_elevador(&f, tempo); // atualizar chamadas no predio
+        printf("\ntempo %ld\n", tempo);
+        listar_andares(predio);
+        listar_elevadores(elevadores, m);
         for (int i = 0; i < m; i++)
         {
-            controlar_porta(elevadores[i]); // simular portas abrindo e botões sendo desapertados
+            controlar_porta(elevadores[i], tempo); // simular portas abrindo e botões sendo desapertados
             atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa na direção atual
-            definir_direcao(elevadores[i]); // definir se o elevador vai subir(1) ou descer(-1)
+            definir_direcao(elevadores[i], tempo); // definir se o elevador vai subir(1) ou descer(-1)
             mover(elevadores[i]); // mover elevador
         }
         if(encerrar(f, elevadores, m)) break;
         tempo++;
         // sleep(1); // wait 1seg
     }
+    unsigned long int energia = 0;
+    for (int i = 0; i < m; i++)
+    {
+        energia += elevadores[i]->energia;
+    }
+        
 
-    printf("\nOs elevadores levaram %ld segundos para entregar todas as pessoas a seus destinos.\n", tempo);
+    printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-\n");
+    mostrar_rotas(elevadores, m);
+    printf("\nTempo Total: %ld segundos\n", tempo);
+    printf("Energia Total consumida: %d", energia);
+    //printf("\nOs elevadores levaram %ld segundos para entregar todas as pessoas a seus destinos.\n", tempo);
     
     //Limpar Memoria
     limpar_elevadores(&elevadores, m);
     limpar_predio(&predio);
-
+    while(f){
+        limpar_pessoas(&f);
+    }
     return 0;
 }

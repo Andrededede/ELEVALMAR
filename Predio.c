@@ -75,21 +75,20 @@ void remover_andar(Andar **predio, int valor)
 void listar_andares(Andar *predio) {
     Andar *aux = predio;
     while(aux) {
-        //printf("%d\n", aux->valor);
         if(aux->fila_s || aux->fila_d) {
-            printf("Pessoas no andar %d: ", aux->valor);
+            printf("Andar %d: ", aux->valor);
             Pessoa *aux2;
             if (aux->fila_s) {
                 aux2 = aux->fila_s;
                 while(aux2) {
-                    printf(" %s ", aux2->id);
+                    printf(" %sS ", aux2->id);
                     aux2 = aux2->prox;
                 }
             }
             if (aux->fila_d) {
                 aux2 = aux->fila_d;
                 while(aux2) {
-                    printf(" %s ", aux2->id);
+                    printf(" %sD ", aux2->id);
                     aux2 = aux2->prox;
                 }
             }
@@ -106,8 +105,14 @@ void limpar_predio(Andar **predio) {
     Andar *aux = *predio;
     while(aux->cima) {
         aux = aux->cima;
+        limpar_pessoas(&(aux->baixo->fila_s));
+        limpar_pessoas(&(aux->baixo->fila_d));
+        limpar_pessoas(&(aux->baixo->chegados));
         free(aux->baixo);
     }
+    limpar_pessoas(&(aux->fila_s));
+    limpar_pessoas(&(aux->fila_d));
+    limpar_pessoas(&(aux->chegados));
     free(aux);
     *predio = NULL;
 }

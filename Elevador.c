@@ -27,8 +27,36 @@ void construir_elevadores(Elevador ***e, Andar *predio, int m)
         (*(*e + i - 1))->requisicao->direcaoRequisitada = 0;
         (*(*e + i - 1))->passageiros = NULL;
         (*(*e + i - 1))->energia = 0;
+        (*(*e + i - 1))->rota = NULL;
     }
 }
+
+Rota *buscar_rota(Rota *lista, unsigned long int tempo){
+    Rota *aux = lista;
+    while(aux && aux->tempo != tempo){
+        aux = aux->prox;
+    }
+    return aux;
+}
+
+void inserir_rota_f(Rota **lista, unsigned long int tempo, Andar *andar)
+{   
+    if(buscar_rota(*lista, tempo)) return;
+    Rota *aux = malloc(sizeof(Rota));
+    aux->tempo = tempo;
+    aux->andar = andar;
+    aux->prox = NULL;
+    if(*lista == NULL){
+        *lista = aux;
+        return;
+    }
+    Rota *aux2 = *lista;
+    while(aux2->prox){
+        aux2 = aux2->prox;
+    }
+    aux2->prox = aux;
+}
+
 
 void apertar_elevador(Elevador *e, int andar){
     e->botoes->tam++;
@@ -57,6 +85,8 @@ void iniciar_elevador(Elevador * e, Andar *predio, char *string)
         apertar_elevador(e, atoi(p));
         p = strtok(NULL, ",");
     }
+    inserir_rota_f(&(e->rota), 0, e->andar);
+    
 }
 
 void atribuir(Elevador *e)
@@ -86,7 +116,6 @@ void atribuir(Elevador *e)
             aux = aux->cima;
         }
         if(aux) { // achou requisição
-            printf("\n\nalguem querendo descer\n\n\n");
             if(e->requisicao->requisitado && e->requisicao->direcaoRequisitada == -1) { // ja tenho uma req na direção
                 if(e->requisicao->requisitado->valor > aux->valor) return; // a minha é melhor
                 if(e->requisicao->requisitado->valor < aux->valor) e->requisicao->requisitado->botao_descer = 1; // a minha é pior, desisto dela
@@ -135,7 +164,7 @@ void atribuir(Elevador *e)
     }
 }
 
-void definir_direcao(Elevador * e)
+void definir_direcao(Elevador * e, unsigned long int tempo)
 {
     if(e->requisicao->requisitado) return; // tenho requisição, vou manter a direção
     if(!e->botoes->apertados)  { // se não tem botões apertados, inverto a direção
@@ -153,6 +182,7 @@ void definir_direcao(Elevador * e)
         }
     }
     e->direcao = e->direcao * -1;
+    inserir_rota_f(&(e->rota), tempo, e->andar);
     atribuir(e);
     return;
 }
@@ -177,11 +207,6 @@ void descer(Elevador *e)
     e->energia++;
 }
 
-// void chamar(Elevador *e)
-// {
-//     return;
-// }
-
 void mover(Elevador *e)
 {
     if (!e->requisicao->requisitado && !e->botoes->apertados) {
@@ -196,12 +221,13 @@ void mover(Elevador *e)
     }
 }
 
-void controlar_porta(Elevador *e)
+void controlar_porta(Elevador *e, unsigned long int tempo)
 {
     // desapertar o botão interno
     for (int i = 0; i < e->botoes->tam; i++)
     {
         if(e->andar->valor == e->botoes->apertados[i]) {
+            inserir_rota_f(&(e->rota), tempo, e->andar);
             //tranferir pessoa para chegados do andar
             Pessoa *aux = e->passageiros;
             while(aux){
@@ -224,6 +250,7 @@ void controlar_porta(Elevador *e)
     // desapertar o botao externo e resetar requisição e apertar botao de quem entra
     if(!e->requisicao->requisitado) return;
     if(e->andar == e->requisicao->requisitado) {
+        inserir_rota_f(&(e->rota), tempo, e->andar);
         if(e->requisicao->direcaoRequisitada == 1) {
             e->andar->botao_subir = 0;
             while(e->andar->fila_s) {
@@ -252,6 +279,14 @@ void listar_elevadores(Elevador **elevadores, int m)
     for (int i = 0; i < m; i++)
     {
         printf("%s: %d, %d\n", elevadores[i]->nome, elevadores[i]->andar->valor, elevadores[i]->direcao);
+        printf("Botoes apertados: ");
+        for(int j = 0; j < elevadores[i]->botoes->tam; j++){
+            printf("%d ", elevadores[i]->botoes->apertados[j]);
+        }
+        printf("\n");
+        if(elevadores[i]->requisicao->requisitado){
+            printf("Requisicao: %d\n", elevadores[i]->requisicao->requisitado->valor);
+        }
     }
     
 }
@@ -267,14 +302,43 @@ int encerrar(Pessoa *fila, Elevador **elevadores, int m)
     return 1;
 }
 
+void mostrar_rotas(Elevador **elevadores, int m)
+{
+    for (int i = 0; i < m; i++)
+    {
+        printf("%s: ", elevadores[i]->nome);
+        Rota * r = elevadores[i]->rota;
+        while(r) {
+            printf("%d(%ld) ", r->andar->valor, r->tempo);
+            if(r->prox) printf("-> ");
+            else printf("\nTempo Final: %ld", r->tempo);
+            r = r->prox;
+        }
+        printf("\nAndares Percorridos: %d\n\n", elevadores[i]->energia);
+    }
+}
+
+void limpar_rota(Elevador *e)
+{
+    Rota *aux = e->rota;
+    Rota *aux2 = aux;
+    while(aux){
+        aux2 = aux;
+        aux = aux->prox;
+        free(aux2);
+    }
+}
+
 void limpar_elevadores(Elevador ***e, int m)
 {
     for (int i = 0; i < m; i++)
     {
+        limpar_rota((*(*e + i)));
         free((*(*e + i))->botoes);
         free((*(*e + i))->botoes->apertados);
         free((*(*e + i))->requisicao);
         free(*(*e + i));
+        limpar_pessoas(&((*(*e + i))->passageiros));
     }
     free(*e);
 }
