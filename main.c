@@ -69,4 +69,12 @@ int main() {
     limpar_predio(&predio);
     limpar_pessoas(&f);
     return 0;
+
+
+    /*
+    ANDRÉ LUCAS SALES BARROS
+    RYAN PIMENTEL BERNARDINO RODRIGUES
+    
+    TRABALHO ESTRUTURA DE DADOS
+    */
 }
