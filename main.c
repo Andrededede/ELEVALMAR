@@ -22,8 +22,6 @@ int main() {
         if(string[i] == 'E') m++; // numero de elevadores
     }
     ps = avancar_string(string, ps, sizeof(string));
-    printf("%d\n\n", sizeof(*ps));
-
 
     // Iniciar predio e elevadores
     Andar *predio;
@@ -55,21 +53,17 @@ int main() {
         }
         if(encerrar(f, elevadores, m)) break;
         tempo++;
-        // sleep(1); // wait 1seg
+        sleep(1); // wait 1seg
     }
     unsigned long int energia = 0;
     for (int i = 0; i < m; i++)
     {
         energia += elevadores[i]->energia;
     }
-        
-
     printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-\n\n");
     mostrar_rotas(elevadores, m);
     printf("\nTempo Total: %ld segundos\n", tempo);
     printf("Energia Total consumida: %d", energia);
-    //printf("\nOs elevadores levaram %ld segundos para entregar todas as pessoas a seus destinos.\n", tempo);
-    
     //Limpar Memoria
     limpar_elevadores(&elevadores, m);
     limpar_predio(&predio);
