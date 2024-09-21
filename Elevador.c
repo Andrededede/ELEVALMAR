@@ -69,7 +69,7 @@ void apertar_elevador(Elevador *e, int andar)
     e->botoes->apertados[e->botoes->tam-1] = andar;
 }
 
-void iniciar_elevador(Elevador * e, Andar *predio, char *string)
+void iniciar_elevador(Elevador *e, Andar *predio, char *string)
 {
     char s[255];
     strcpy(s, string);
@@ -169,7 +169,7 @@ void atribuir(Elevador *e)
     }
 }
 
-void definir_direcao(Elevador * e, unsigned long int tempo)
+void definir_direcao(Elevador *e, unsigned long int tempo)
 {
     if(e->requisicao->requisitado) return; // tenho requisição, vou manter a direção
     if(!e->botoes->apertados)  { // se não tem botões apertados, inverto a direção
@@ -311,7 +311,7 @@ void mostrar_rotas(Elevador **elevadores, int m)
     for (int i = 0; i < m; i++)
     {
         printf("%s: ", elevadores[i]->nome);
-        Rota * r = elevadores[i]->rota;
+        Rota *r = elevadores[i]->rota;
         while(r) {
             printf("%d(%ld) ", r->andar->valor, r->tempo);
             if(r->prox) printf("-> ");

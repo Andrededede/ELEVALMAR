@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Pessoa.h"
 
-char * avancar_string(char *s, char *p, int tam)
+char *avancar_string(char *s, char *p, int tam)
 {
     char *aux = s;
     int cont = 0;
