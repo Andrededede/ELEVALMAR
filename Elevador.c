@@ -59,6 +59,9 @@ void inserir_rota_f(Rota **lista, unsigned long int tempo, Andar *andar)
 
 
 void apertar_elevador(Elevador *e, int andar){
+    for(int i = 0; i < e->botoes->tam; i++){
+        if(e->botoes->apertados[i] == andar) return;
+    }
     e->botoes->tam++;
     e->botoes->apertados = realloc(e->botoes->apertados, sizeof(int)*e->botoes->tam);
     e->botoes->apertados[e->botoes->tam-1] = andar;
