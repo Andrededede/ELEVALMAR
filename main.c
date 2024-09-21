@@ -43,8 +43,8 @@ int main() {
         listar_elevadores(elevadores, m);
         for (int i = 0; i < m; i++)
         {
-            controlar_porta(elevadores[i], tempo); // simular portas abrindo e botões sendo desapertados
             atribuir(elevadores[i]); // atribuir ao elevadores[i] uma chamada externa na direção atual
+            controlar_porta(elevadores[i], tempo); // simular portas abrindo e botões sendo desapertados
             definir_direcao(elevadores[i], tempo); // definir se o elevador vai subir(1) ou descer(-1)
             mover(elevadores[i]); // mover elevador
         }
