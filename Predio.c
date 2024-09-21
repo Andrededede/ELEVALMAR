@@ -72,7 +72,8 @@ void remover_andar(Andar **predio, int valor)
     free(aux);
 }
 
-void listar_andares(Andar *predio) {
+void listar_andares(Andar *predio)
+{
     Andar *aux = predio;
     while(aux) {
         if(aux->fila_s || aux->fila_d) {
@@ -98,7 +99,8 @@ void listar_andares(Andar *predio) {
     }
 }
 
-void limpar_predio(Andar **predio) {
+void limpar_predio(Andar **predio)
+{
     if(!(*predio)){
         return;
     }

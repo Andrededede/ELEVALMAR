@@ -3,7 +3,8 @@
 #include <string.h>
 #include "Pessoa.h"
 
-char * avancar_string(char *s, char *p, int tam) {
+char * avancar_string(char *s, char *p, int tam)
+{
     char *aux = s;
     int cont = 0;
     while (aux != p) {
@@ -88,7 +89,8 @@ Pessoa *buscar_pessoa(Pessoa *lista, char id[5])
     return aux;
 }
 
-Pessoa *no_anterior(Pessoa *lista, Pessoa *no){
+Pessoa *no_anterior(Pessoa *lista, Pessoa *no)
+{
     Pessoa *aux = no;
     Pessoa *aux2 = lista;
     if(aux == aux2){
@@ -103,7 +105,8 @@ Pessoa *no_anterior(Pessoa *lista, Pessoa *no){
     return aux2;
 }
 
-void inserir_no_pessoa_f(Pessoa **lista, Pessoa *p){
+void inserir_no_pessoa_f(Pessoa **lista, Pessoa *p)
+{
     p->prox = NULL;
     if(!(*lista)) {
         *lista = p;

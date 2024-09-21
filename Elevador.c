@@ -31,7 +31,8 @@ void construir_elevadores(Elevador ***e, Andar *predio, int m)
     }
 }
 
-Rota *buscar_rota(Rota *lista, unsigned long int tempo){
+Rota *buscar_rota(Rota *lista, unsigned long int tempo)
+{
     Rota *aux = lista;
     while(aux && aux->tempo != tempo){
         aux = aux->prox;
@@ -58,7 +59,8 @@ void inserir_rota_f(Rota **lista, unsigned long int tempo, Andar *andar)
 }
 
 
-void apertar_elevador(Elevador *e, int andar){
+void apertar_elevador(Elevador *e, int andar)
+{
     for(int i = 0; i < e->botoes->tam; i++){
         if(e->botoes->apertados[i] == andar) return;
     }
